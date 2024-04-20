@@ -1,43 +1,23 @@
-<!-- 日記作成画面 -->
 <?php
 session_start();
-
 include("funcs.php");
 $pdo = db_conn();
 
-// 例として、GETリクエストから子どものIDを取得（実際にはセッションなど他の方法でも良い）
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
-if ($id > 0) {
-    $stmt = $pdo->prepare("SELECT name FROM children WHERE id = :id");
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $child = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($children) {
-        $_SESSION["id"] = $child['id'];
-    } else {
-        echo "指定されたIDの子どもが見つかりません。";
-    }
-} else {
-    echo "IDが正しく指定されていません。";
-}
-?>
-
-<?php
-
-
-// 特定のお子様のIDをセット（セッションやGETリクエストから取得するなど）
-// $id = 1; // この例では仮に1とします
-
-// 特定のお子様のニックネームを取得
-// $stmt = $pdo->prepare("SELECT nickname FROM children WHERE id = :id");
-// $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+// // ユーザー情報の取得
+// $user_id = $_SESSION['id'];
+// $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
+// $stmt->bindValue(':id', $user_id, PDO::PARAM_INT);
 // $stmt->execute();
-// $child = $stmt->fetch(PDO::FETCH_ASSOC);
+// $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// $nickname = $child['nickname'];
-?>
+// // お子様情報の取得
+// $child_id = $_SESSION['child_id'];
+// $stmt = $pdo->prepare("SELECT * FROM children WHERE id = :id");
+// $stmt->bindValue(':id', $child_id, PDO::PARAM_INT);
+// $stmt->execute();
+// $child_info = $stmt->fetch(PDO::FETCH_ASSOC);
+// ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -62,8 +42,8 @@ if ($id > 0) {
       background-color: #f8f9fa;
     }
     h1 {
-  text-align: center;
-}
+      text-align: center;
+    }
     .container {
       background-color: white;
       border-radius: 8px;
@@ -108,23 +88,18 @@ if ($id > 0) {
 </header>
 
 <main>
-
-
   <h1>今日も育児お疲れ様！</h1>
-  <div class="container">
-  <?echo $_SESSION["nickname"]; ?>
 
-    <h2><?= htmlspecialchars($name, ENT_QUOTES) ?>ちゃんは、今日どんな様子だった？</h2>
-    <form method="POST" action="dialys.php" enctype="multipart/form-data">
-      <input type="hidden" name="child_id" value="<?= htmlspecialchars($id, ENT_QUOTES); ?>">
+  <div class="container">
+    <?= $child_info['name'] ?>ちゃんは、今日どんな様子だった？<br>
+
+    <form method="POST" action="dialy.php" enctype="multipart/form-data">
+      <input type="hidden" name="child_id" value="<?= $child_id ?>">
       <label>日付：<input type="date" name="entry_date" required></label><br>
-      <!-- <label>時間：<input type="time" name="entry_time" required></label><br> -->
       <label>今日の様子：<textarea name="content" rows="4" cols="40" required></textarea></label><br>
-      <!-- <label>写真：<input type="file" name="photo_path"></label><br> -->
       <input type="submit" value="送信">
     </form>
   </div>
 </main>
-
 </body>
 </html>

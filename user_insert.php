@@ -2,12 +2,8 @@
 //$_SESSION使うよ！
 session_start();
 
-//※htdocsと同じ階層に「includes」を作成してfuncs.phpを入れましょう！
-//include "../../includes/funco.php";
-include "funco.php";
-$pdo = db_conn();
-// sschk();
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 //1. POSTデータ取得
 $name      = filter_input( INPUT_POST, "name" );
 $username       = filter_input( INPUT_POST, "username" );

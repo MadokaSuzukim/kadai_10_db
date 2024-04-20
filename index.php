@@ -2,8 +2,11 @@
 <?php
 //最初にSESSIONを開始！！ココ大事！！
 session_start();
+error_reporting(E_ALL); 
+ini_set('display_errors', '1');
+
 // ログイン成功時
-$_SESSION['userID'] = $fetchedUserID; // ログイン処理中に取得したユーザーのID
+$_SESSION['userID'] = $fetchedid; // ログイン処理中に取得したユーザーのID
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +35,7 @@ $_SESSION['userID'] = $fetchedUserID; // ログイン処理中に取得したユ
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- <div class="navbar-header"> -->
-      <a class="navbar-brand" href="select.php">初回登録画面</a>
+      <a class="navbar-brand" href="select.php">こども登録フォーム</a>
     </div>
   </div>
 </nav>
@@ -42,9 +45,19 @@ $_SESSION['userID'] = $fetchedUserID; // ログイン処理中に取得したユ
 <!-- Main[Start] -->
 <main>
   <div class="container">
+  <?php
+    if (isset($_SESSION['name'])) {
+        $name = $_SESSION['name'];
+    } else {
+        $name = 'ゲスト';
+    }
+    echo $name . 'さん、こんにちは！<br>';
+    echo "こちらはお子様情報登録画面です。<br>";
+    echo "既にお子様情報を登録されている場合は、登録キッズ一覧よりお進みください。";
+    ?>
     <h2>お子様の情報を登録してください</h2>
     <p>以下のフォームにお子様の情報を入力してください。</p>
-    <form method="POST" action="insert.php">
+    <form method="POST" action="registered.php">
       <div class="mb-3">
         <label for="name" class="form-label">名前：</label>
         <input type="text" class="form-control" id="name" name="name" required>
@@ -68,6 +81,8 @@ $_SESSION['userID'] = $fetchedUserID; // ログイン処理中に取得したユ
       <div class="mb-3">
         <label for="likes" class="form-label">好きなこと：</label>
         <textarea class="form-control" id="likes" name="likes" rows="4"></textarea>
+        <!-- 以下は親のユーザーIDをセッションから取得する例です -->
+    <input type="hidden" name="parent_id" value="<?= $_SESSION['id'] ?>">
       </div>
       <button type="submit" class="btn btn-primary">送信</button>
     </form>
@@ -75,9 +90,9 @@ $_SESSION['userID'] = $fetchedUserID; // ログイン処理中に取得したユ
 </main>
 
 <!-- Main[End] -->
-
+<!-- 
 <div class="navbar-header"><a class="navbar-brand" href="count.php">登録データ分布参照</a></div>
-<div class="navbar-header"><a class="navbar-brand" href="select.php">登録データ一覧参照</a></div>
+<div class="navbar-header"><a class="navbar-brand" href="select.php">登録データ一覧参照</a></div> -->
 
 </body>
 </html>
