@@ -26,60 +26,60 @@ $pdo = db_conn();
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>div{padding: 10px;font-size:16px;}</style>
   <style>
-    .navbar .container-fluid {
-      display: flex;
-      justify-content: center;
-    }
-    .navbar-header {
-      float: none;
-    }
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    /* ここから追加のスタイル */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f8f9fa;
-    }
-    h1 {
+    header {
       text-align: center;
+      margin-bottom: 20px;
     }
     .container {
       background-color: white;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      max-width: 600px;
-      margin: 20px auto;
+      width: 300px;
     }
-    form {
-      display: flex;
-      flex-direction: column;
+    fieldset {
+      border: none;
     }
-    input[type="date"],
-    input[type="time"],
-    input[type="file"],
-    textarea,
-    input[type="submit"] {
-      margin: 10px 0;
+    legend {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
     label {
-      margin-top: 20px;
-      margin-bottom: 5px;
-      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
     }
     input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
       background-color: #007bff;
       color: white;
       border: none;
-      padding: 10px;
       cursor: pointer;
-      border-radius: 5px;
     }
     input[type="submit"]:hover {
       background-color: #0056b3;
     }
   </style>
+  
 </head>
 <body>
 

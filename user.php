@@ -79,7 +79,7 @@ $pdo = db_conn();
 <!-- </header> --> 
 
 <!-- Main[Start] -->
-<form method="post" action="user_insert.php">
+<form method="post" action="insert.php">
   <div class="jumbotron">
    <fieldset>
     <legend>ユーザー登録</legend>

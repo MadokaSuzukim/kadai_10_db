@@ -10,7 +10,8 @@ include("funcs.php");
 $pdo = db_conn();
 
 // ユーザー名を元にデータベースからユーザー情報を取得
-$stmt = $pdo->prepare("SELECT * FROM gs_user_table WHERE username=:username AND life_flg=0");
+$sql = "SELECT * FROM parents WHERE username = :username AND life_flg = 0";
+$stmt = $pdo->prepare($sql);
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $status = $stmt->execute();
 
@@ -20,8 +21,7 @@ if($status == false){
 } else {
     // ユーザーデータの取得
     $val = $stmt->fetch();
-
-    if(password_verify($password, $val["password"])){ 
+    if ($val && password_verify($password, $val["password"])) {
         // パスワードが一致した場合はセッションにユーザー情報を保存し、リダイレクトする
         $_SESSION["chk_ssid"]  = session_id();
         $_SESSION["kanri_flg"] = $val['kanri_flg'];
@@ -35,7 +35,3 @@ if($status == false){
     }
 }
 ?>
-
-
-
-

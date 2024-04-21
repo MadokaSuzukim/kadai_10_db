@@ -5,8 +5,14 @@ session_start();
 error_reporting(E_ALL); 
 ini_set('display_errors', '1');
 
-// ログイン成功時
-$_SESSION['userID'] = $fetchedid; // ログイン処理中に取得したユーザーのID
+// セッションから親のIDを取得
+if (isset($_SESSION['id'])) {
+  $parents_id = $_SESSION['id'];
+} else {
+  // セッションにIDがない場合、エラーを表示またはデフォルト値を設定
+  $parents_id = 'デフォルト値'; // またはエラーメッセージを表示
+  echo "親のIDがセッションに存在しません。<br>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,15 +33,17 @@ $_SESSION['userID'] = $fetchedid; // ログイン処理中に取得したユー�
 }
   
 </style>
+
 <nav class="navbar navbar-default">
 </head>
 <body>
 <!-- Head[Start] -->
 <header>
-<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- <div class="navbar-header"> -->
       <a class="navbar-brand" href="select.php">こども登録フォーム</a>
+      <br><?php
+      include("menu.php");?>
+
     </div>
   </div>
 </nav>
@@ -57,7 +65,7 @@ $_SESSION['userID'] = $fetchedid; // ログイン処理中に取得したユー�
     ?>
     <h2>お子様の情報を登録してください</h2>
     <p>以下のフォームにお子様の情報を入力してください。</p>
-    <form method="POST" action="registered.php">
+    <form method="POST" action="insert.php">
       <div class="mb-3">
         <label for="name" class="form-label">名前：</label>
         <input type="text" class="form-control" id="name" name="name" required>
@@ -82,11 +90,15 @@ $_SESSION['userID'] = $fetchedid; // ログイン処理中に取得したユー�
         <label for="likes" class="form-label">好きなこと：</label>
         <textarea class="form-control" id="likes" name="likes" rows="4"></textarea>
         <!-- 以下は親のユーザーIDをセッションから取得する例です -->
-    <input type="hidden" name="parent_id" value="<?= $_SESSION['id'] ?>">
+    <!-- <input type="hidden" name="parent_id" value="<?= $_SESSION['id'] ?>"> -->
+    <input type="hidden" name="parent_id" value="<?= htmlspecialchars($parent_id) ?>">
+
       </div>
       <button type="submit" class="btn btn-primary">送信</button>
     </form>
   </div>
+  <a href="home.php" class="navbar-brand">ホームへ戻る</a>
+
 </main>
 
 <!-- Main[End] -->

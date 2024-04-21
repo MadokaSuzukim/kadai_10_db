@@ -16,7 +16,7 @@ include("funcs.php");
 $pdo = db_conn();
 
 //３．データ登録SQL作成
-$sql = "INSERT INTO gs_user_table(name,username,password,kanri_flg,life_flg)VALUES(:name,:username,:password,:kanri_flg,0)";
+$sql = "INSERT INTO parents(name,username,password,kanri_flg,life_flg)VALUES(:name,:username,:password,:kanri_flg,0)";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':name', $name, PDO::PARAM_STR); //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':username', $username, PDO::PARAM_STR); //Integer（数値の場合 PDO::PARAM_INT)

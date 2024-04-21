@@ -1,10 +1,8 @@
 <!-- 日記登録画面 -->
 <?php
+session_start(); // セッションを開始
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-session_start(); // セッションを開始
-
 $uploadsDir = '/Applications/XAMPP/xamppfiles/htdocs/php/kadai_08_db/uploads';
 if (!is_dir($uploadsDir)) {
     mkdir($uploadsDir, 0777, true);

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <!-- ブランドとトグルボタン -->
-    <a class="navbar-brand" href="registerd.php">ホーム</a>
+    <a class="navbar-brand" href="home.php">ホーム</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,7 +28,7 @@
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <!-- ブランドとトグルボタン -->
-    <a class="navbar-brand" href="#">画面下のナビゲーション</a>
+    <a class="navbar-brand" href="#">設定</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

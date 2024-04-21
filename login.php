@@ -6,6 +6,7 @@ ini_set('display_errors', '1');
 //※htdocsと同じ階層に「includes」を作成してfuncs.phpを入れましょう！
 //include "../../includes/funcs.php";
 include "funcs.php"
+
 ?>
 
 <!DOCTYPE html>
@@ -16,22 +17,23 @@ include "funcs.php"
 <!-- <link rel="stylesheet" href="css/main.css" /> -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <style>div{padding: 10px;font-size:16px;}</style>
 <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
     header {
       text-align: center;
       margin-bottom: 20px;
@@ -74,6 +76,7 @@ include "funcs.php"
       background-color: #0056b3;
     }
   </style>
+
 <!-- <title>ログイン</title> -->
 
 </head>
@@ -81,7 +84,7 @@ include "funcs.php"
 
 <!-- lLOGINogin_act.php は認証処理用のPHPです。 -->
 <form name="form1" action="login_act.php" method="post">
-
+<fieldset>
 <legend>ログイン画面</legend>
 <?php
     if (isset($_SESSION['name'])) {
@@ -89,18 +92,19 @@ include "funcs.php"
     } else {
         $name = 'ゲスト';
     }
-    echo $name . 'さん、こんにちは！';
-    ?> <br>
-    <nav class="navbar navbar-default">登録したユーザーID,パスワードを入力してください。</nav>
-
+    echo $name . 'さん、こんにちは！<br>';
+    echo "登録したユーザーID,パスワードを入力してください。";
+    ?> 
+    <br>
 ユーザーID:<input type="email" name="username">
+
+<br>
 パスワード:<input type="password" name="password">
 <input type="submit" value="ログイン">
 </form>
+<a href="user.php" class="navbar-brand">初回登録の方はこちら</a>
 
 </body>
 </html>
-<?php
+</fieldset>
 
-
-?>

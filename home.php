@@ -15,14 +15,48 @@ $sql = "SELECT * FROM children";
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 
-//３．データ表示
-$values = "";
-if($status==false) {
-  sql_error($stmt);
-}
-//全データ取得
-$values = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$json = json_encode($values, JSON_UNESCAPED_UNICODE);
+// // ログインしている親のIDを取得
+// $parent_id = $_SESSION['parent_id'];
+
+
+// //３．データ表示
+// $values = "";
+// if($status==false) {
+//   sql_error($stmt);
+// }
+// //全データ取得
+// $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// $json = json_encode($values, JSON_UNESCAPED_UNICODE);
+
+// // エラーチェック
+// if ($conn->connect_error) {
+//   die("Connection failed: " . $conn->connect_error);
+// }
+// // 親IDに基づいて子供の情報を取得するクエリ
+// $sql = "SELECT * FROM children WHERE parent_id = ?";
+// $stmt = $conn->prepare($sql);
+// $stmt->bind_param("i", $parent_id);
+// $stmt->execute();
+// $result = $stmt->get_result();
+
+// if ($result->num_rows > 0) {
+//     // 結果をHTMLテーブルに出力
+//     while($row = $result->fetch_assoc()) {
+//         echo "<tr>";
+//         echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
+//         echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+//         echo "<td>" . htmlspecialchars($row["nickname"]) . "</td>";
+//         echo "<td>" . htmlspecialchars($row["birthdate"]) . "</td>";
+//         echo "<td>" . htmlspecialchars($row["gender"]) . "</td>";
+//         echo "<td>" . htmlspecialchars($row["likes"]) . "</td>";
+//         echo "<td><a href='detail.php?id=" . htmlspecialchars($row["id"]) . "'>更新</a></td>";
+//         echo "<td><a href='delete.php?id=" . htmlspecialchars($row["id"]) . "'>削除</a></td>";
+//         echo "</tr>";
+//     }
+// } else {
+//     echo "子供の情報が見つかりません。";
+// }
+// $conn->close();
 
 ?>
 
@@ -36,19 +70,19 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <link href="styles.css" rel="stylesheet"> -->
+<style>
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  <style>div{padding: 10px;font-size:16px;}</style>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
     header {
       text-align: center;
       margin-bottom: 20px;
@@ -122,23 +156,12 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
         </tr>
       <?php } ?> -->
     <a class="navbar-brand" href="index.php">新規キッズデータ登録</a>
+    <a class="navbar-brand" href="dialy.php">キッズ別記録記載画面</a>
+    <a class="navbar-brand" href="count.php">お子様登録データ分布参照</a></div>
       </div>
     </div>
   </nav>
 </header>
-<!-- Head[End] -->
-
-
-<!-- Main[Start] -->
-<div>
-    <div class="container jumbotron">
-
-      </table>
-    <!-- <a class="navbar-brand" href="index.php">データ登録画面へ</a> -->
-    <a class="navbar-brand" href="dialy.php">キッズ別記録記載画面</a>
-    <div class="navbar-header"><a class="navbar-brand" href="count.php">お子様登録データ分布参照</a></div>
-    <!-- <div><?= $view ?></div> -->
-  </div>
 </main>
 </body>
 </html>
